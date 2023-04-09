@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML Buttons</title>
+    <style>
+        button {
+			background-color: yellow;
+			color: black;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			margin: 5px;
+			cursor: pointer;
+		}
+        button:hover {
+			background-color: black;
+			color: white;
+		}
+        label {
+			display: block;
+			margin-top: 10px;
+		}
+		.font1,.text_align1 {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #333;
+		}
+		.font,.text_align {
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid blue;
+			background-color: #f7f7f7;
+			width: 150px;
+			color: #333;
+		}
+		option {
+			padding: 5px;
+			font-size: 16px;
+			background-color: #fff;
+			color: #333;
+		}
+		#font-select {
+			font-family: inherit;
+		}
+		#copy-button{
+			background-color: green;
+			color: black;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			margin: 5px;
+			cursor: pointer;
+		}
+		.input1 {
+			border: 2px solid;
+			border-radius: 4px;
+			font-size: 1rem;
+			margin: 0.25rem;
+			min-width: 125px;
+			padding: 0.5rem;
+			border-color: gray;
+		  }
+    </style>
+</head>
+<body>
+	<form>
+		<label>Select a tag:</label>
+		<button type="button" value="h1">H1</button>
+        <button type="button" value="h2">H2</button>
+        <button type="button" value="h3">H3</button>
+		<button type="button" value="h2">H4</button>
+        <button type="button" value="h3">H5</button>
+		<button type="button" value="h2">H6</button>
+		<button class="tooltip" type="button" value="ol">Ordered List</button>
+		<button type="button" value="ul">Unordered List</button>
+		<button type="button" value="p">Paragraph</button>
+		<button type="button" value="span">Span</button>
+        <button type="button" value="br">Break</button>
+		<button type="button" value="hr">Horizontal Rule</button><br><br><br>
+        
+		<label>Color:</label>
+		<input type="color" id="color-input">
+        <br><br><br><br>
+
+		<label class="text_align1">Text Align:</label>
+		<select style="width: 100px;" class="text_align" id="text-align-input">
+			<option value="left">Left</option>
+			<option value="center">Center</option>
+			<option value="right">Right</option>
+		</select><br><br><br><br>
+
+        <label class="font1">Font style:</label>
+			<select class="font" id="font-select">
+			<option value="Arial">Arial</option>
+			<option value="Times New Roman">Times New Roman</option>
+			<option value="Courier New">Courier New</option>
+			<option value="Verdana">Verdana</option>
+		</select><br><br><br><br>		
+
+        <label>Input:</label>
+		<input class="input1" type="text" id="tag-input" value="" placeholder="Enter text here...">
+        <br><br>
+
+		<label>Output:</label>
+		<div id="output"></div>
+		<br><br><br><br>
+		<button type="button" id="copy-button">Copy</button><br><br>
+
+		<button type="button" id="generate-button">Generate HTML</button><br>
+		<textarea id="html-code" rows="10" cols="50"></textarea>
+	</form>	
+
+	<script>
+		const buttons = document.querySelectorAll('button');
+		const tagInput = document.getElementById('tag-input');
+		const colorInput = document.getElementById('color-input');
+		const textAlignInput = document.getElementById('text-align-input');
+		const generateButton = document.getElementById('generate-button');
+        const fontSelect = document.getElementById('font-select');
+		const copyButton = document.getElementById('copy-button');
+		const outputDiv = document.getElementById('output');
+		const htmlCodeTextarea = document.getElementById('html-code');
+        const fontStyles = ['Arial', 'Times New Roman', 'Courier New', 'Verdana'];
+
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				const selectedTag = event.target.value;
+				const colorValue = colorInput.value;
+                const fontValue = fontSelect.value;
+				const textAlignValue = textAlignInput.value;
+				const inputList = tagInput.value.split(',').map(s => s.trim());
+				let html = '';
+
+				switch (selectedTag) {
+					case 'h1':
+						outputDiv.innerHTML += `<h1 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h1>`;
+						break;
+                    case 'h2':
+						outputDiv.innerHTML += `<h2 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h2>`;
+						break;
+                    case 'h3':
+						outputDiv.innerHTML += `<h3 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h3>`;
+						break;
+					case 'h4':
+						outputDiv.innerHTML += `<h4 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h4>`;
+						break;
+					case 'h5':
+						outputDiv.innerHTML += `<h5 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h5>`;
+						break;
+					case 'h6':
+						outputDiv.innerHTML += `<h6 style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</h6>`;
+						break;
+					case 'ol':
+                        html = `<ol style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue};list-style-position: inside;">`;
+                            inputList.forEach((item) => {
+                            html += `<li>${item}</li>`;
+                            });
+                            html += `</ol>`;
+                        break;
+                    case 'ul':
+                        html = `<ul style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue};list-style-position: inside;">`;
+                            inputList.forEach((item) => {
+                            html += `<li>${item}</li>`;
+                            });
+                            html += `</ul>`;
+                        break;
+					case 'p':
+						outputDiv.innerHTML += `<p style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</p>`;
+						break;
+					case 'span':
+						outputDiv.innerHTML += `<span style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</span>`;
+						break;
+                    case 'br':
+						outputDiv.innerHTML += '<br>';
+						break;
+					case 'hr':
+						outputDiv.innerHTML += '<hr>';
+						break;
+                    case 'font':
+						// Do nothing for now
+						break;
+					default:
+						// Handle other tags here
+						break;
+				}
+				outputDiv.innerHTML += html;
+				tagInput.value = '';
+				colorInput.value = '#000000';
+                fontSelect.value = 'Arial';
+			});
+        });
+
+
+		fontSelect.addEventListener('change', (event) => {
+			fontInput.value = event.target.value;
+		});
+
+
+		
+		const fontElements = document.querySelectorAll('.font1, #font-select');
+		fontSelect.addEventListener('change', function() {
+			fontElements.forEach(element => {
+				element.style.fontFamily = this.value;
+			});
+		});
+	
+
+		const textAlignSelect = document.getElementById('text-align-input');
+		textAlignSelect.addEventListener('change', function() {
+		textAlignSelect.style.textAlign = this.value;
+		});
+
+		
+		copyButton.addEventListener('click', () => {
+		const range = document.createRange();
+		range.selectNode(outputDiv);
+		window.getSelection().removeAllRanges();
+		window.getSelection().addRange(range);
+		try {
+			document.execCommand('copy');
+			console.log('Text copied to clipboard');
+		} catch (err) {
+			console.error('Could not copy text: ', err);
+		} finally {
+			window.getSelection().removeAllRanges();
+		}
+		// Unselect the copied text
+			window.getSelection().empty();
+		});
+
+		generateButton.addEventListener('click', () => {
+			let htmlCode = outputDiv.innerHTML;
+			htmlCode = htmlCode.replaceAll('<', '\n<');
+			htmlCodeTextarea.value = htmlCode;
+	
+			htmlCodeTextarea.addEventListener('input', () => {
+			outputDiv.innerHTML = htmlCodeTextarea.value;
+		  });
+		  
+	  });
+          
+
+	</script>
+</body>
+</html>
