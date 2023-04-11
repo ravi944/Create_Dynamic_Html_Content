@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport"      content="width=device-width, initial-scale=1.0">
+	<meta name="viewport"content="width=device-width, initial-scale=1.0">
 	<title>HTML Buttons</title>
     <style>
         button {
@@ -80,7 +80,6 @@
 		<button class="tooltip" type="button" value="ol">Ordered List</button>
 		<button type="button" value="ul">Unordered List</button>
 		<button type="button" value="p">Paragraph</button>
-		<button type="button" value="span">Span</button>
         <button type="button" value="br">Break</button>
 		<button type="button" value="hr">Horizontal Rule</button><br><br><br>
         
@@ -173,9 +172,6 @@
                         break;
 					case 'p':
 						outputDiv.innerHTML += `<p style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</p>`;
-						break;
-					case 'span':
-						outputDiv.innerHTML += `<span style="color:${colorValue};text-align:${textAlignValue};font-family:${fontValue}">${inputList.join('')}</span>`;
 						break;
                     case 'br':
 						outputDiv.innerHTML += '<br>';
